@@ -2,4 +2,6 @@
  * @Author: CYY 767516226@qq.com
  * @LastEditors: CYY 767516226@qq.com
  */
-console.log(('' +  1) === '1');
+let p = ['a','b','c'];
+let ch = p.join('');
+console.log(typeof(ch));
