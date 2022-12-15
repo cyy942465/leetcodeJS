@@ -1,8 +1,8 @@
 /*
  * @Author: CYY 767516226@qq.com
- * @Date: 2022-12-14 16:42:58
+ * @Date: 2022-12-14 17:17:24
  * @LastEditors: CYY 767516226@qq.com
- * @LastEditTime: 2022-12-14 17:14:20
+ * @LastEditTime: 2022-12-15 10:16:10
  */
 /**
  * Definition for a binary tree node.
@@ -13,20 +13,15 @@
  * }
  */
 /**
- * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
  * @return {boolean}
  */
-var isSymmetric = function(root) {
-  if (root === null) {
-    return true;
-  }
-
-  return compare(root.left,root.right);
+var isSameTree = function(p, q) {
+  return compare(p,q);
 };
 
-// 递归函数，判断两个节点是否相等
-var compare = function(left, right) {
-  // 递归中止条件
+let compare = function(left, right) {
   if (left === null && right !== null) {
     return false;
   } else if (left !== null && right === null) {
@@ -37,10 +32,10 @@ var compare = function(left, right) {
     return false;
   }
 
-  // 两个节点相同,比较他们的内侧和外侧节点
-  let outside = compare(left.left, right.right);
-  let inside = compare(left.right, right.left);
-  let isSame = outside && inside;
+  // 非空且相等的情况
+  let leftSide = compare(left.left, right.left);
+  let rightSize = compare(left.right, right.right);
+  let isSame = leftSide && rightSize;
 
   return isSame;
 }
