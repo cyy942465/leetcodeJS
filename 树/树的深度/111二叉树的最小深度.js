@@ -2,7 +2,7 @@
  * @Author: CYY 767516226@qq.com
  * @Date: 2022-12-15 16:16:11
  * @LastEditors: CYY 767516226@qq.com
- * @LastEditTime: 2022-12-15 16:23:05
+ * @LastEditTime: 2022-12-15 16:29:10
  */
 /**
  * Definition for a binary tree node.
@@ -27,6 +27,14 @@ let getDepth = function(node) {
   let leftDepth = getDepth(node.left);
   let rightDepth = getDepth(node.right);
 
-  return 1 + Math.min(leftDepth, rightDepth);
+  if (leftDepth === 0 && rightDepth === 0) {
+    return 1;
+  } else if (leftDepth === 0) {
+    return rightDepth + 1;
+  } else if (rightDepth === 0) {
+    return leftDepth + 1;
+  } else {
+    return 1 + Math.min(leftDepth, rightDepth);
+  }
 
 }
