@@ -2,7 +2,7 @@
  * @Author: CYY 767516226@qq.com
  * @Date: 2022-12-18 21:23:40
  * @LastEditors: CYY 767516226@qq.com
- * @LastEditTime: 2022-12-18 21:49:11
+ * @LastEditTime: 2022-12-19 16:20:16
  */
 /**
  * Definition for a binary tree node.
@@ -40,13 +40,17 @@ let travelTree = function(inorder, postorder) {
     }
 
     // 找到中序遍历的切割点
-    let delimiterIndex = inorder.filter(value => {
-        return value === root.val;
-    });
+    let delimiterIndex;
+    for(let i = 0; i < inorder.length; i++) {
+        if (inorder[i] === root.val) {
+            delimiterIndex = i;
+            break;
+        }
+    }
 
     // 切割中序遍历数组
-    let leftInorder = inorder.slice(0, delimiterIndex[0]);
-    let rightInorder = inorder.slice(delimiterIndex[0] + 1);
+    let leftInorder = inorder.slice(0, delimiterIndex);
+    let rightInorder = inorder.slice(delimiterIndex + 1);
 
     // 后序遍历数组舍弃末尾元素
     postorder.pop();
