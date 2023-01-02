@@ -1,8 +1,8 @@
 /*
  * @Author: CYY 767516226@qq.com
- * @Date: 2022-12-19 17:10:22
+ * @Date: 2022-12-21 20:47:07
  * @LastEditors: CYY 767516226@qq.com
- * @LastEditTime: 2022-12-21 20:44:00
+ * @LastEditTime: 2022-12-21 20:53:36
  */
 /**
  * Definition for a binary tree node.
@@ -14,9 +14,9 @@
  */
 /**
  * @param {TreeNode} root
- * @return {boolean}
+ * @return {number}
  */
-var isValidBST = function(root) {
+var getMinimumDifference = function(root) {
     let inOrder = [];
     let travel = function(node) {
         if (node === null) {
@@ -28,14 +28,15 @@ var isValidBST = function(root) {
     }
 
     travel(root);
-    // 获取中序遍历数组
-    // 判断中序遍历数组是否为升序数组
-    for(let i = 1; i < inOrder.length; i++) {
-        if (inOrder[i - 1] >= inOrder[i]) {
-            return false;
+    let min = Infinity;
+    if (inOrder.length < 2) {
+        return 0;
+    }
+    for (let i = 1; i < inOrder.length; i ++) {
+        if (inOrder[i] - inOrder[i - 1] < min) {
+            min = inOrder[i] - inOrder[i - 1];
         }
     }
 
-    return true;
+    return min;
 };
-
