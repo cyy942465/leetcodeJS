@@ -1,3 +1,10 @@
+/*
+ * @Author: cyy
+ * @Date: 2023-02-08 16:08:01
+ * @LastEditors: cyy
+ * @LastEditTime: 2023-02-08 16:15:54
+ * @Description: default
+ */
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -8,39 +15,37 @@
  */
 /**
  * @param {TreeNode} root
- * @return {number}
+ * @param {number} targetSum
+ * @return {boolean}
  */
-var sumNumbers = function(root) {
-    let result = [];
+var hasPathSum = function(root, targetSum) {
+    let result = false;
     let path = [];
 
-    let backTracking = function(root, path) {
+    let backtracking = function(root, path) {
         if (root === null) {
             return;
         }
+
         if (root.left === null && root.right === null) {
-            // path.push(root.val);
-            // console.log(path);
             const len = path.length;
             let sum = 0;
             for (let i = 0; i < len; i++) {
                 const cur = path[i];
-                sum += cur * Math.pow(10, len - i);
+                sum += cur;
             }
-            result.push(sum + root.val);
-            return;
+            sum += root.val;
+            if (sum === targetSum) {
+                result = true;
+            }
         }
 
         path.push(root.val);
-        backTracking(root.left, path);
-        backTracking(root.right, path);
+        backtracking(root.left, path);
+        backtracking(root.right, path);
         path.pop();
     }
 
-    backTracking(root, path);
-    // console.log(result);
-
-    return result.reduce((pre, cur) => {
-        return pre + cur;
-    }, 0);
+    backtracking(root, path);
+    return result;
 };
